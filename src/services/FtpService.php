@@ -61,6 +61,7 @@ class FtpService
      * 下载文件
      * @param string $removeFile
      * @param string $localFile
+     * @throws Exception
      */
     public function download($removeFile, $localFile) {
         if (ftp_get($this->conn, $localFile, $removeFile, FTP_BINARY)) {
