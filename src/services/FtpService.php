@@ -39,10 +39,6 @@ class FtpService
         if (!ftp_login($this->conn, $username, $password)) {
             throw new Exception("FtpService.conn(): Login failed");
         }
-
-        if (!ftp_put($this->conn, "/tmpfile", "./tmpfile", FTP_BINARY)) {
-            throw new Exception("FtpService.conn(): put file failed");
-        }
     }
 
     /**
