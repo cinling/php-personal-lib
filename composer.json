@@ -10,7 +10,8 @@
     "version": "0.0.0-alpha.0",
     "require": {
         "php": ">=5.6",
-        "ext-ftp": "*"
+        "ext-ftp": "*",
+        "phpoffice/phpspreadsheet": "^1.6"
     },
     "autoload": {
         "psr-4": {"cin\\personalLib\\": "src/"},

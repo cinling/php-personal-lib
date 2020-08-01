@@ -15,7 +15,7 @@ class StringUtil
      * @param string $start 字符串开头的部分
      * @return bool
      */
-    public static function StartWidth($origin, $start) {
+    public static function startWidth($origin, $start) {
         return strpos($origin, $start) === 0;
     }
 
@@ -24,7 +24,7 @@ class StringUtil
      * @param $end $start 字符串结尾的部分
      * @return bool
      */
-    public static function EndWidth($origin, $end) {
+    public static function endWidth($origin, $end) {
         return substr($origin, strpos($origin, $end)) === $end;
     }
 }
