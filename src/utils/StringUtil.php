@@ -27,4 +27,32 @@ class StringUtil
     public static function endWidth($origin, $end) {
         return substr($origin, strpos($origin, $end)) === $end;
     }
+
+    /**
+     * 将下划线转为驼峰
+     * @param string $underline 下划线变量。如：user_type
+     * @param bool $isFirstBig 首字母是否大写
+     * @return string 驼峰命名。如：userType
+     */
+    public static function underlineToHump($underline, $isFirstBig = false) {
+        $hump = preg_replace_callback('/([-_]+([a-z]{1}))/i', function ($matches) {
+            return strtoupper($matches[2]);
+        }, $underline);
+        if ($isFirstBig) {
+            $hump[0] = strtoupper($hump[0]);
+        }
+        return $hump;
+    }
+
+    /**
+     * 将驼峰转为下划线
+     * @param string $hump
+     * @return string 下划线命名
+     */
+    public static function humpToUnderline($hump) {
+        $underline = preg_replace_callback('/([A-Z]{1})/', function ($matches) {
+            return '_' . strtolower($matches[0]);
+        }, $hump);
+        return ltrim($underline, "_");
+    }
 }
