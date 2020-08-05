@@ -6,6 +6,9 @@ namespace cin\personalLib\utils;
 /**
  * Class TimeUtil 时间工具
  * @package cin\personalLib\utils
+ * @deprecated remove on v1.0.0 将用 DatetimeUtil 和 TimestampUtil 代替
+ * @see DatetimeUtil
+ * @see TimestampUtil
  *
  * 标准时间格式： 2006-01-02 15:04:05
  */
@@ -36,15 +39,7 @@ class TimeUtil
      * @return int
      */
     public static function datetimeToTimestamp($datetime) {
-
-    }
-
-    /**
-     * 将日期转为时间戳
-     * @param $time
-     */
-    public static function getDateEndTimestamp($time) {
-        $timestamp = TimeUtil::isTimestamp($time) ? $time : TimeUtil::datetimeToTimestamp($time);
+        return strtotime($datetime);
     }
 
     /**
