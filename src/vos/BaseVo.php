@@ -6,6 +6,7 @@ namespace cin\personalLib\vos;
 use cin\personalLib\interfaces\ArrayAbleInterface;
 use cin\personalLib\utils\ArrayUtil;
 use cin\personalLib\utils\ExcelUtil;
+use cin\personalLib\utils\StringUtil;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -159,8 +160,15 @@ class BaseVo implements ArrayAbleInterface
      * 转换为数组
      * @return array
      */
-    public function toArray()
-    {
-        return ArrayUtil::toArray($this);
+    public function toArray() {
+        $attrs = get_object_vars($this);
+
+        // 排除 __ 开头的变量
+        foreach ($attrs as $prop => $value) {
+            if (StringUtil::startWidth($prop, "__")) {
+                unset($attrs[$prop]);
+            }
+        }
+        return ArrayUtil::toArray($attrs);
     }
 }
