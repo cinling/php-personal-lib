@@ -14,4 +14,11 @@ interface ArrayAbleInterface
      * @return array
      */
     public function toArray();
+
+    /**
+     * 将数组数据写入到对象中
+     * @param $attrs
+     * @return void
+     */
+    public function setAttrs($attrs);
 }
