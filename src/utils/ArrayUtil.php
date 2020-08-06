@@ -20,7 +20,7 @@ class ArrayUtil
         if (is_array($object)) {
             foreach ($object as &$value) {
                 if (is_object($value) || is_array($value))  {
-                    $value = ArrayUtil::toArray($value);
+                    $value = static::toArray($value);
                 }
             }
             return $object;
@@ -32,7 +32,7 @@ class ArrayUtil
             }
             foreach ($object as &$value) {
                 if (is_object($value) || is_array($value))  {
-                    $value = ArrayUtil::toArray($value);
+                    $value = static::toArray($value);
                 }
             }
             return $object;
