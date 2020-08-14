@@ -6,6 +6,7 @@ namespace cin\personalLib\vos;
 use cin\personalLib\interfaces\ArrayAbleInterface;
 use cin\personalLib\utils\ArrayUtil;
 use cin\personalLib\utils\ExcelUtil;
+use cin\personalLib\utils\JsonUtil;
 use cin\personalLib\utils\StringUtil;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -29,6 +30,15 @@ class BaseVo implements ArrayAbleInterface
             $voList[$key] = $vo;
         }
         return $voList;
+    }
+
+    /**
+     * @param $json
+     * @return static[]
+     */
+    public static function initListByJson($json) {
+        $rows = JsonUtil::decode($json);
+        return static::initList($rows);
     }
 
     /**
@@ -111,11 +121,25 @@ class BaseVo implements ArrayAbleInterface
     }
 
     /**
+     * @param $row
+     * @return static
+     */
+    public static function init($row) {
+        $vo = new static();
+        $vo->setAttrs($row);
+        return $vo;
+    }
+
+    /**
      * BaseVo constructor.
      * @param array $config 预留构造函数。防止被使用
      */
-    public function __construct($config = [])
-    {
+    public function __construct($config = []) {
+        $this->onInit();
+    }
+
+    protected function onInit() {
+
     }
 
     /**

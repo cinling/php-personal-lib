@@ -4,6 +4,7 @@
 namespace cin\personalLib\services;
 
 
+use cin\personalLib\traits\SingleTrait;
 use Exception;
 
 /**
@@ -12,14 +13,12 @@ use Exception;
  */
 class FtpService
 {
+    use SingleTrait;
+
     /**
      * @var mixed ftp链接
      */
     private $conn;
-
-    public function __construct()
-    {
-    }
 
     /**
      * 链接FTP服务器

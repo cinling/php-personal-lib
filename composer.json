@@ -7,10 +7,11 @@
             "email": "1105412681@qq.com"
         }
     ],
-    "version": "0.0.6",
+    "version": "0.0.7",
     "require": {
         "php": ">=5.6",
         "ext-ftp": "*",
+        "ext-json": "*",
         "ext-curl": "*",
         "phpoffice/phpspreadsheet": "^1.8"
     },
