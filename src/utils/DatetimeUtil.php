@@ -42,4 +42,14 @@ class DatetimeUtil {
     public static function datetimeToTimestamp($datetime) {
         return strtotime($datetime);
     }
+
+    /**
+     * 时间取整分钟
+     * @param string $datetime
+     * @return false|string
+     */
+    public static function floorMinute($datetime) {
+        $format = str_replace("s", "00", self::DatetimeFormatHorizontalLine);
+        return date($format, strtotime($datetime));
+    }
 }
