@@ -11,6 +11,16 @@ trait SingleTrait {
     protected static $ins = null;
 
     /**
+     * @return static
+     */
+    public static function getIns() {
+        if (static::$ins === null) {
+            static::$ins = new static();
+        }
+        return self::$ins;
+    }
+
+    /**
      * SingleTrait constructor.
      * 保护构造函数
      */
