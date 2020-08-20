@@ -18,6 +18,11 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class BaseVo implements ArrayAbleInterface
 {
     /**
+     * @var array 配置
+     */
+    protected $__config = [];
+
+    /**
      * 初始化列表 或 字典
      * @param array[] $rows
      * @return static[]
@@ -135,6 +140,7 @@ class BaseVo implements ArrayAbleInterface
      * @param array $config 预留构造函数。防止被使用
      */
     public function __construct($config = []) {
+        $this->__config = $config;
         $this->onInit();
     }
 

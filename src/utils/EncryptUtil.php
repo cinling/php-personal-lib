@@ -17,6 +17,14 @@ class EncryptUtil {
     }
 
     /**
+     * @param string $str 加密字符串
+     * @return string sha1 加密后的值
+     */
+    public static function sha1($str) {
+        return sha1($str);
+    }
+
+    /**
      * @param string $str
      * @return string
      */

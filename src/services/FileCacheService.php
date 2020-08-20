@@ -65,7 +65,7 @@ class FileCacheService {
      * @return string
      */
     private function getSavePath($key) {
-        $filename = EncryptUtil::sha512($key);
+        $filename = EncryptUtil::sha1($key);
         return $this->config->path . "/" . $this->getRelativeFilename($filename);
     }
 
@@ -88,6 +88,6 @@ class FileCacheService {
             $dir .= substr($filename, $startIndex, $this->config->pathUnitLen);
         }
 
-        return $dir . "/" . $filename;
+        return $dir . "/" . $filename . ".cache";
     }
 }

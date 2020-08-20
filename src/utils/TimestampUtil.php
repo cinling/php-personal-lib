@@ -6,6 +6,7 @@ namespace cin\personalLib\utils;
 
 /**
  * Class TimestampUtil 时间戳工具
+ * @deprecated 和 DatetimeUtil 合并为 TimeUtil
  * @package cin\personalLib\utils
  */
 class TimestampUtil {

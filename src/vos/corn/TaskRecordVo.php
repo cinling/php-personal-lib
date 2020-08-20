@@ -4,6 +4,7 @@
 namespace cin\personalLib\vos\corn;
 
 
+use cin\personalLib\utils\TimeUtil;
 use cin\personalLib\vos\BaseVo;
 
 /**
@@ -36,4 +37,12 @@ class TaskRecordVo extends BaseVo {
      * @var int 创建时间
      */
     public $createAt;
+
+    /**
+     * 初始化数据
+     */
+    public function onInit() {
+        parent::onInit();
+        $this->createAt = TimeUtil::stamp();
+    }
 }
