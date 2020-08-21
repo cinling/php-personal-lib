@@ -144,6 +144,9 @@ class BaseVo implements ArrayAbleInterface
         $this->onInit();
     }
 
+    /**
+     * 初始化数据
+     */
     protected function onInit() {
 
     }

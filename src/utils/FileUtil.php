@@ -37,4 +37,25 @@ class FileUtil {
             unlink($dirOrFile);
         }
     }
+
+    /**
+     * 扫描目录下所有的子目录和文件
+     * @param string $path 扫描的路径
+     * @param string[] $excludes 排除的子项
+     * @return string[]
+     */
+    public static function scanDir($path, $excludes = [".", ".."]) {
+        if (!file_exists($path)) {
+            return [];
+        }
+        $files = scandir($path);
+        if (is_array($files)) {
+            foreach ($files as $key => $file) {
+                if (in_array($file, $excludes)) {
+                    unset($files[$key]);
+                }
+            }
+        }
+        return $files;
+    }
 }
