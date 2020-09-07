@@ -4,9 +4,9 @@
 namespace cin\personalLib\exceptions;
 
 /**
- * Class CronException 定时任务异常
+ * Class FtpException ftp 异常
  * @package cin\personalLib\exceptions
  */
-class CronException extends CinException {
+class FtpException extends CinException {
 
 }
