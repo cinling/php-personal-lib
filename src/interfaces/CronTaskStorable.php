@@ -9,10 +9,10 @@ use cin\personalLib\vos\corn\TaskRecordVo;
 use cin\personalLib\vos\corn\TaskVo;
 
 /**
- * Class CronTaskStoreInterface 定时任务存取接口
+ * Class CronTaskStorable 定时任务存取接口
  * @package cin\personalLib\interfaces
  */
-interface CronTaskStoreInterface {
+interface CronTaskStorable {
     /**
      * @return TaskVo[] 获取所有定时任务
      * @throws CronException

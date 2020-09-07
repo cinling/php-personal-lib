@@ -3,7 +3,10 @@
 
 namespace cin\personalLib\traits;
 
-
+/**
+ * Trait SingleTrait 单例插件
+ * @package cin\personalLib\traits
+ */
 trait SingleTrait {
     /**
      * @var null|static

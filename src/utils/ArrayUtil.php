@@ -3,7 +3,7 @@
 
 namespace cin\personalLib\utils;
 
-use cin\personalLib\interfaces\ArrayAbleInterface;
+use cin\personalLib\interfaces\Arrayable;
 
 /**
  * Class ArrayUtil 数组工具
@@ -25,7 +25,7 @@ class ArrayUtil
             }
             return $object;
         } else if (is_object($object)) {
-            if ($object instanceof ArrayAbleInterface) {
+            if ($object instanceof Arrayable) {
                 $object = $object->toArray();
             } else {
                 $object = get_object_vars($object);

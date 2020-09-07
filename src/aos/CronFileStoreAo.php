@@ -4,7 +4,7 @@
 namespace cin\personalLib\aos;
 
 
-use cin\personalLib\interfaces\CronTaskStoreInterface;
+use cin\personalLib\interfaces\CronTaskStorable;
 use cin\personalLib\services\FileCacheService;
 use cin\personalLib\vos\BaseVo;
 use cin\personalLib\vos\corn\TaskRecordVo;
@@ -14,7 +14,7 @@ use cin\personalLib\vos\corn\TaskVo;
  * Class CronFileStoreAo 定时任务 文件存取 实现
  * @package cin\personalLib\aos
  */
-class CronFileStoreAo extends BaseVo implements CronTaskStoreInterface {
+class CronFileStoreAo extends BaseVo implements CronTaskStorable {
     /**
      * 文件缓存的key
      */

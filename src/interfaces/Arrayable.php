@@ -4,10 +4,10 @@
 namespace cin\personalLib\interfaces;
 
 /**
- * Interface AArrayAble 可转为数组
+ * Interface Arrayable 可转为数组
  * @package cin\personalLib\vos
  */
-interface ArrayAbleInterface
+interface Arrayable
 {
     /**
      * 将数据转为数组

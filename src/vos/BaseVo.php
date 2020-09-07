@@ -3,7 +3,11 @@
 
 namespace cin\personalLib\vos;
 
-use cin\personalLib\interfaces\ArrayAbleInterface;
+use cin\personalLib\interfaces\Arrayable;
+use cin\personalLib\interfaces\Errorable;
+use cin\personalLib\interfaces\Verifiable;
+use cin\personalLib\traits\ErrorTrait;
+use cin\personalLib\traits\LabelTrait;
 use cin\personalLib\utils\ArrayUtil;
 use cin\personalLib\utils\ExcelUtil;
 use cin\personalLib\utils\JsonUtil;
@@ -15,8 +19,11 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
  * Class BaseVo 基础类型的vo数据
  * @package cin\personalLib\vos
  */
-class BaseVo implements ArrayAbleInterface
+class BaseVo implements Arrayable, Verifiable, Errorable
 {
+    use ErrorTrait;
+    use LabelTrait;
+
     /**
      * @var array 配置
      */
@@ -152,24 +159,6 @@ class BaseVo implements ArrayAbleInterface
     }
 
     /**
-     * 字段对应的标签
-     * @return array
-     */
-    public function labels() {
-        return [];
-    }
-
-    /**
-     * 获取属性对应的标签名字
-     * @param string $prop
-     * @return string
-     */
-    public function label($prop) {
-        $labels = $this->labels();
-        return isset($labels[$prop]) ? $labels[$prop] : $prop;
-    }
-
-    /**
      * 排除的导出属性
      * @return string[]
      */
@@ -203,5 +192,43 @@ class BaseVo implements ArrayAbleInterface
             }
         }
         return ArrayUtil::toArray($attrs);
+    }
+
+    /**
+     * 判断对象中有无该属性
+     * @param $prop
+     * @return bool
+     */
+    public function hasProp($prop) {
+        return property_exists($this, $prop);
+    }
+
+    /**
+     * 验证是否合法
+     * @return bool
+     */
+    public function valid() {
+        $rules = $this->rules();
+        foreach ($rules as $ruleVo) {
+            foreach ($ruleVo->props as $prop) {
+                $label = $this->label($prop);
+
+                if (!property_exists($this, $prop)) {
+                    $this->addError("不存在的字段名：" . $label);
+                    continue;
+                }
+                foreach ($ruleVo->handles as $handle) {
+                    $handle($this, $prop, $label, $this->$prop);
+                }
+            }
+        }
+        return !$this->hasError();
+    }
+
+    /**
+     * @return RuleVo[]
+     */
+    public function rules() {
+        return [];
     }
 }

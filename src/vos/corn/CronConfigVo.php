@@ -5,7 +5,7 @@ namespace cin\personalLib\vos\corn;
 
 
 use cin\personalLib\aos\CronFileStoreAo;
-use cin\personalLib\interfaces\CronTaskStoreInterface;
+use cin\personalLib\interfaces\CronTaskStorable;
 use cin\personalLib\vos\BaseVo;
 
 /**
@@ -14,7 +14,7 @@ use cin\personalLib\vos\BaseVo;
  */
 class CronConfigVo extends BaseVo {
     /**
-     * @var CronTaskStoreInterface 存取实例
+     * @var CronTaskStorable 存取实例
      */
     public $store;
     /**
