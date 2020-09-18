@@ -5,7 +5,7 @@ namespace cin\personalLib\utils;
 
 /**
  * Class DatetimeUtil 日期-时间 格式工具
- * @deprecated 和 TimestampUtil 合并为 TimeUtil
+ * @deprecated 和 TimestampUtil 合并为 TimeUtil。TODO 在 v1.0.0 后删除
  * @package cin\personalLib\utils
  */
 class DatetimeUtil {

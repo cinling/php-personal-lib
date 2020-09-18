@@ -17,9 +17,25 @@ class ValidFactoryService{
 
     /**
      * 必填项
+     * @deprecated 在 v1.0.0 之后删除
+     * @see ValidFactoryService::required() 替代方法
      * @return Closure
      */
     public function requireHandler() {
+        /**
+         * @param Errorable $errorTrait
+         * @param string $prop 属性
+         * @param string $propLabel 属性标签（便于阅读）
+         * @param mixed $value 任何值
+         */
+        return $this->required();
+    }
+
+    /**
+     * 必填项
+     * @return Closure
+     */
+    public function required() {
         /**
          * @param Errorable $errorTrait
          * @param string $prop 属性
