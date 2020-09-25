@@ -55,4 +55,13 @@ class StringUtil
         }, $hump);
         return ltrim($underline, "_");
     }
+
+    /**
+     * 判断字符串是否是 base64 编码
+     * @param string $str
+     * @return bool
+     */
+    public static function isBase64($str) {
+        return $str == base64_encode(base64_decode($str));
+    }
 }
