@@ -49,4 +49,25 @@ class EncryptUtil {
     public static function serialize($value) {
         return serialize($value);
     }
+
+    /**
+     * 将字符串 base64 加密
+     * @param string $str
+     * @return string
+     */
+    public static function base64Encode($str) {
+        return base64_encode($str);
+    }
+
+    /**
+     * 解析 base64 编码。如果 base64 不是 base64 编码，则返回原数据
+     * @param string $base64
+     * @return string
+     */
+    public static function base64Decode($base64) {
+        if (!StringUtil::isBase64($base64)) {
+            return $base64;
+        }
+        return base64_decode($base64);
+    }
 }
