@@ -4,7 +4,6 @@
 namespace cin\personalLib\vos\corn;
 
 
-use cin\personalLib\utils\TimestampUtil;
 use cin\personalLib\vos\BaseVo;
 
 /**

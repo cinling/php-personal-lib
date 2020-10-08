@@ -8,12 +8,44 @@ use cin\personalLib\vos\BaseVo;
 use cin\personalLib\vos\RuleVo;
 
 class ValidTestVo extends BaseVo {
-    public $v1;
-    public $v2;
-    public $v3;
-    public $v4;
-    public $v5;
-    public $v6;
+    /**
+     * @var string 名字
+     */
+    public $name;
+    /**
+     * @var string 手机号码
+     */
+    public $phone;
+    /**
+     * @var string 邮箱地址
+     */
+    public $email;
+    /**
+     * @var int 年龄
+     */
+    public $age;
+    /**
+     * @var int 分数
+     */
+    public $score;
+    /**
+     * @var string 性别
+     */
+    public $sex;
+
+    /**
+     * @return string[]
+     */
+    public function labels() {
+        return [
+            "name" => "名字",
+            "phone" => "手机号",
+            "email" => "邮箱地址",
+            "age" => "年龄",
+            "score" => "分数",
+            "sex" => "性别"
+        ];
+    }
 
     /**
      * 验证规则
@@ -23,10 +55,9 @@ class ValidTestVo extends BaseVo {
         $srv = ValidFactoryService::getIns();
 
         return array_merge(parent::rules(), [
-            RuleVo::initBase(["v1", "v2"], [$srv->requireHandler()]),
-            RuleVo::initBase(["v0", "v1", "v2", "v3", "v4", "v5"], [$srv->lenBetween(1, 4)]),
-            RuleVo::initBase(["v1", "v2", "v3", "v4", "v5"], [$srv->number()]),
-            RuleVo::initBase(["v1", "v2", "v3", "v4", "v5"], [$srv->integer()]),
+            RuleVo::initBase(["name"], [$srv->lenBetween(1, 20)]),
+            RuleVo::initBase(["sex"], [$srv->in(["男", "女"])]),
+            RuleVo::initBase(["score"], [$srv->gte(91)]),
         ]);
     }
 }
@@ -34,16 +65,15 @@ class ValidTestVo extends BaseVo {
 
 $ms = DevelUtil::useMS(function () {
     $vo = new ValidTestVo();
-    $vo->v1 = "";
-    $vo->v2 = "12345";
-    $vo->v3 = "A12345";
-    $vo->v4 = [];
-    $vo->v5 = "12345@abc.com";
-    $vo->v6 = 123456;
+    $vo->name = "小明";
+    $vo->sex = "男";
+    $vo->score = 90;
     if (!$vo->valid()) {
-        print_r($vo->getErrorDict());
+//        print_r($vo->getErrorDict());
+        ConsoleUtil::output($vo->getFirstError());
+    } else {
+        ConsoleUtil::output("验证通过");
     }
-    ConsoleUtil::output($vo->getFirstError());
 });
 
 ConsoleUtil::output("耗时：" . $ms . "ms");

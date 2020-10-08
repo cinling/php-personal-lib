@@ -7,7 +7,7 @@
             "email": "1105412681@qq.com"
         }
     ],
-    "version": "0.0.13",
+    "version": "1.0.0",
     "require": {
         "php": ">=5.6",
         "ext-ftp": "*",

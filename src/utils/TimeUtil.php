@@ -24,44 +24,6 @@ class TimeUtil
     const DatetimeFormatHorizontalLine = "Y-m-d H:i:s";
 
     /**
-     * 当前系统时间戳
-     * @deprecated 已简化为 stamp TODO 在 v1.0.0 后删除
-     * @return int
-     */
-    public static function timestamp() {
-        return self::stamp();
-    }
-
-    /**
-     * 当前系统时间戳（毫秒）
-     * @deprecated 已简化为 stamp TODO 在 v1.0.0 后删除
-     * @return float 由于数字大小溢出 int 返回，因此只能转为 float
-     */
-    public static function timestampMS() {
-        return self::stampMS();
-    }
-
-    /**
-     * 日期转时间戳
-     * @deprecated 已简化为 stamp TODO 在 v1.0.0 后删除
-     * @param $datetime
-     * @return int
-     */
-    public static function datetimeToTimestamp($datetime) {
-        return strtotime($datetime);
-    }
-
-    /**
-     * 判断时间是不是时间戳。仅支持 秒 和 毫秒 的时间戳类型。
-     * @deprecated 已简化为 stamp TODO 在 v1.0.0 后删除
-     * @param float|int|string $time
-     * @return bool
-     */
-    public static function isTimestamp($time) {
-        return is_int($time);
-    }
-
-    /**
      * 判断时间是不是时间戳。仅支持 秒 和 毫秒 的时间戳类型。
      * @param $time
      * @return bool
