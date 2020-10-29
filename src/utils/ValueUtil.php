@@ -33,7 +33,7 @@ class ValueUtil {
      * @param mixed[] $dict 标签字典
      * @param string|int $key 字典key
      * @param mixed $defaultValue 默认值。当 $key 不存在字典中时返回
-     * @return string
+     * @return mixed
      */
     public static function getValue($dict, $key, $defaultValue = "") {
         return isset($dict[$key]) ? $dict[$key] : $defaultValue;
