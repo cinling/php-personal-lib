@@ -55,14 +55,14 @@ class BaseVo implements Arrayable, Verifiable, Errorable
 
     /**
      * 导出为excel数据
-     * @param string $filename 导出文件名（不包含后缀）
+     * @param string $excelFilename 导出文件名（不包含后缀）
      * @param static[] $vos 导出数据
-     * @param string $title 表格标签的名字（只有一个标签）
+     * @param string $sheetTitle 表格标签的名字（只有一个标签）
      * @param bool $autoSetWidth 自动设置宽度
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    public static function export($filename, $vos = [], $title = "sheet1", $autoSetWidth = true) {
+    public static function export($excelFilename, $vos = [], $sheetTitle = "sheet1", $autoSetWidth = true) {
         if (count($vos) === 0) {
             $vos[] = new static();
         }
@@ -116,7 +116,7 @@ class BaseVo implements Arrayable, Verifiable, Errorable
                 }
             }
             $sheet = $spreadsheet->getActiveSheet();
-            $sheet->setTitle($title);
+            $sheet->setTitle($sheetTitle);
             foreach ($columnsLenArr as $columnIndex => $len) {
                 $letter = ExcelUtil::numToLetter($columnIndex + 1);
                 $sheet->getColumnDimension($letter)->setWidth($len);
@@ -126,7 +126,78 @@ class BaseVo implements Arrayable, Verifiable, Errorable
         $writer = new Xlsx($spreadsheet);
         Header("Content-type:  application/octet-stream ");
         Header("Accept-Ranges:  bytes ");
-        Header("Content-Disposition:  attachment;  filename=\"" . $filename . ".xlsx\"");
+        Header("Content-Disposition:  attachment;  filename=\"" . $excelFilename . ".xlsx\"");
+        header('Cache-Control: max-age=0');//禁止缓存
+        $writer->save('php://output');
+        exit();
+    }
+
+    /**
+     * 到處為 excel 數據。可以帶圖片
+     * TODO 未完成的方法
+     * @deprecated 咱不可用
+     * @param string $excelFilename excel 文件名（導出文件的名字）
+     * @param static[] $vos
+     * @param string $sheetTitle 默認工作表名字
+     * @param array $imageFields
+     * @param int $imageWidth 圖片寬度和高度。所有圖片都相同
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public static function exportWithImage($excelFilename, $vos = [], $sheetTitle = "sheet1", $imageFields = [], $imageWidth = 80) {
+        // 增大可用内存
+        ini_set('memory_limit', '1024M');
+
+        if (count($vos) === 0) {
+            $vos[] = new static();
+        }
+        $labels = [];
+        foreach ($vos as $vo) {
+            $arr = $vo->toArray();
+            foreach ($arr as $key => $value) { // 将所有属性转为label。如果没有配置属性的翻译，则使用key作为字段
+                $labels[$key] = $key;
+            }
+            $tmpLabels = $vo->labels();
+            foreach ($tmpLabels as $key => $label) {
+                $labels[$key] = $label;
+            }
+            // 排除不需要导出的字段
+            $excludeProp = $vo->excludeExportProps();
+            foreach ($excludeProp as $prop) {
+                unset($labels[$prop]);
+            }
+            break;
+        }
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+//        // 写入表头
+//        $colIndex = 1;
+//        foreach ($labels as $label) {
+//            $letter = ExcelUtil::numToLetter($colIndex);
+//            $sheet->getCell($letter . "1")->setValue($label);
+//            $colIndex++;
+//        }
+
+//        // 写入数值
+//        $rowIndex = 2;
+//        foreach ($vos as $vo) {
+//            $colIndex = 1;
+//            foreach ($labels as $prop => $value) {
+//                if (!$vo->hasProp($prop)) {
+//                    continue;
+//                }
+//                $letter = ExcelUtil::numToLetter($colIndex);
+//                $sheet->getCell($letter . $rowIndex)->setValue($value);
+//
+//                $colIndex++;
+//            }
+//            $rowIndex++;
+//        }
+        $writer = new Xlsx($spreadsheet);
+        Header("Content-type:  application/octet-stream ");
+        Header("Accept-Ranges:  bytes ");
+        Header("Content-Disposition:  attachment;  filename=\"" . $excelFilename . ".xlsx\"");
         header('Cache-Control: max-age=0');//禁止缓存
         $writer->save('php://output');
         exit();
