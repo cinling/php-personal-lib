@@ -30,7 +30,7 @@ class FileCacheService {
     /**
      * @param FileCacheConfigVo $config 服务配置
      */
-    public function setConfig($config) {
+    public function setConfig(FileCacheConfigVo $config) {
         $this->config = $config;
     }
 
