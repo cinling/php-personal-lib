@@ -122,7 +122,7 @@ class LogService {
      * @param string $title
      */
     public function error($content, $title = "cin-error") {
-        $this->base(self::LogLevelTrace, $title, $content);
+        $this->base(self::LogLevelError, $title, $content);
     }
 
     /**
