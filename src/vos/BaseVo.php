@@ -31,7 +31,7 @@ class BaseVo implements Arrayable, Verifiable, Errorable
 
     /**
      * 初始化列表 或 字典
-     * @param array[] $rows
+     * @param mixed[] $rows
      * @return static[]
      */
     public static function initList($rows) {
