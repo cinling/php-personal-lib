@@ -38,7 +38,7 @@ class FileCacheService {
      * 设置缓存
      * @param string $key
      * @param mixed $value
-     * @param int $duration 缓存时长。单位：秒。0代表限制
+     * @param int $duration 缓存时长。单位：秒。0代表永久缓存（不限制）
      */
     public function set($key, $value, $duration = 0) {
         $path = $this->getSavePath($key);
