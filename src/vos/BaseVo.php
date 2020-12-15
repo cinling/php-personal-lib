@@ -214,6 +214,15 @@ class BaseVo implements Arrayable, Verifiable, Errorable
     }
 
     /**
+     * @param $json
+     * @return static
+     */
+    public static function initByJson($json) {
+        $row = JsonUtil::decode($json);
+        return static::init($row);
+    }
+
+    /**
      * BaseVo constructor.
      * @param array $config 预留构造函数。防止被使用
      */
